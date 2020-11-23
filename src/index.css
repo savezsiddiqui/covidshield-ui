@@ -1,7 +1,13 @@
-#root {
+#root, .card, .form-control, .form-control:focus {
   background-color: #212121;
-  font-family: "Operator Mono", serif !important;
+  font-family: "Operator Mono", "Consolas";
   color: white;
 }
+
+.card {
+  border: 0.25px solid #bbbbbb;
+  border-radius: 0px;
+}
+
 
 

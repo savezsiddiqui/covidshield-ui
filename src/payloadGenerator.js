@@ -1,5 +1,5 @@
 
-const PayloadGenerator = (length) => {
+export const payloadGenerator = (length) => {
 
     const A = [];
     let b = '0x';
@@ -17,6 +17,3 @@ const PayloadGenerator = (length) => {
 
     return b;
 }
-
-
-console.log(PayloadGenerator(3));
