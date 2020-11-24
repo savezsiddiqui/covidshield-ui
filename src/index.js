@@ -39,13 +39,13 @@ const App = () => {
 
    const viewHealth = async () => {
       try {
-         const _healthy = await registration.methods.myHealthStatus().send({
+         const _healthy = await registration.methods.myHealthStatus().call({
             from: account
          });
          setHealthy(_healthy);
       }
       catch (err) {
-         console.log('toggleHealth : ', err);
+         console.log('viewHealth : ', err);
       }
    }
 
@@ -88,9 +88,10 @@ const App = () => {
 
    const checkStatus = async () => {
       try {
-         const _othHealthy = await registration.methods.checkStatus(payload, checkPayload).send({
+         const _othHealthy = await registration.methods.checkHealth(payload, checkPayload).call({
             from: account
          });
+         console.log(_othHealthy);
          setOthHealthy(_othHealthy);
       }
       catch (err) {
@@ -143,7 +144,7 @@ const App = () => {
                      <Card.Body>
                         <FormGroup>
                            <FormLabel>View your health status.</FormLabel><br />
-                           <FormLabel>Current Status: {healthy === null ? 'unknown' : (healthy === true ? 'Safe' : 'At Risk')}</FormLabel><br />
+                           <FormLabel>Healthy: {healthy === null ? 'unknown' : JSON.stringify(healthy)}</FormLabel><br />
                            <Button variant='outline-light' onClick={() => viewHealth()}>View Health</Button>
                         </FormGroup>
                      </Card.Body>
@@ -194,7 +195,7 @@ const App = () => {
                      <Card.Body>
                         <FormGroup>
                            <FormLabel>Check SomeOne's Health Status</FormLabel><br />
-                           <FormLabel>Healthy: {othHealthy}</FormLabel>
+                           <FormLabel>Healthy: {othHealthy === null ? 'unknown' : JSON.stringify(othHealthy)}</FormLabel>
                            <FormControl
                               type='text'
                               placeholder='Others Payload'
