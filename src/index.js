@@ -104,6 +104,10 @@ const App = () => {
          try {
             const _account = (await web3.eth.getAccounts())[0];
             setAccount(_account);
+            const _healthy = await registration.methods.myHealthStatus().call({
+               from: _account
+            });
+            setHealthy(_healthy);
          }
          catch (err) {
             console.log('FetchData:', err);
@@ -140,7 +144,7 @@ const App = () => {
                </Col>
 
                <Col md={4} className='text-center'>
-                  <Card>
+                  <Card style={{ backgroundColor: healthy === null ? '#212121' : healthy === true ? '#2e7d32' : '#dd2c00' }}>
                      <Card.Body>
                         <FormGroup>
                            <FormLabel>View your health status.</FormLabel><br />
@@ -191,7 +195,7 @@ const App = () => {
                </Col>
 
                <Col md={4} className='text-center'>
-                  <Card>
+                  <Card style={{ backgroundColor: othHealthy === null ? '#212121' : othHealthy === true ? '#2e7d32' : '#dd2c00' }}>
                      <Card.Body>
                         <FormGroup>
                            <FormLabel>Check SomeOne's Health Status</FormLabel><br />
@@ -207,7 +211,7 @@ const App = () => {
                   </Card>
                </Col>
             </Row>
-         </Container>
+         </Container >
       )
    }
 }
